@@ -2,6 +2,10 @@ const electron = require('electron')
 // Module to control application life.
 const {ipcMain} = require("electron")
 const app = electron.app
+const fs = require('fs');
+var Converter = require("csvtojson").Converter;
+var converter = new Converter({});
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 // Keep a global reference of the window object, if you don't, the window will
@@ -10,7 +14,7 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 1000, height: 780})
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
@@ -46,6 +50,16 @@ function createTestWindow () {
 }
 
 
+function uploadWindow (ev){
+  const dialog = require('electron').dialog;
+  var path = dialog.showOpenDialog({ properties: [ 'openFile', 'openDirectory' ]});
+  converter.fromFile(path[0],function(err,result){
+    ev.sender.send("json",result);
+    console.log(result);
+  });
+
+}
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -74,4 +88,8 @@ app.on('activate', function () {
 ipcMain.on("test",() => {
   createTestWindow()
   mainWindow.close()
+})
+
+ipcMain.on("upload",(ev) => {
+  uploadWindow(ev)
 })

@@ -1,74 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
-    <link rel="stylesheet" href="../fonts/icons.css">
-  <link rel="stylesheet" href="../css/quiz.css">
-  <title>Quiz App</title>
-</head>
-<body>
-  <div class="header blue accent-3">
-    <h1 class="logo">Sample Test</h1>
-    <h1 id="timer">00:00</h1>
-  </div>
-  <section class="row">
-    <div class="left col m3">
-      <div class="card">
-        <div class="card-content q-jump-container">
-          <a class="waves-effect waves-light btn q-jump">1</a>
-          <a class="waves-effect waves-light btn q-jump">2</a>
-          <a class="waves-effect waves-light btn q-jump">3</a>
-          <a class="waves-effect waves-light btn q-jump">4</a>
+<div id="paperHeader" class="row teal margin-bottom-0">
+    <div class="col s6 white-text">
+        <h1 class="logo">SSC Test Paper</h1>
+    </div>
+    <div class="col s6 header-timer-parent">
+        <div class="header-timer">
+            <i class="large material-icons padding-right-10">query_builder</i>
+            <div  class="text-large" countdown date="{{quiz.date}}"></div>
         </div>
-      </div>
-      <a class="btn waves-effect waves-light green accent-4
+    </div>
+</div>
+<section class="row">
+    <div class="left col m3 stable-bg padding-top-20" ng-style="quiz.fullHeight">
+        <div class="card un-card">
+            <div class="card-content q-jump-container">
+                <span class="card-title bold gray">Section No.</span>
+                <div class="row">
+                    <div class="col s3" ng-repeat="s in quiz.sections">
+                        <a class="waves-effect waves-light btn btn-floating q-jump" ng-click="quiz.changeSection(s)"
+                           ng-class="{'yellow text-dark':quiz.section==s,'teal':quiz.section==!s,'btn-large':quiz.largeButton}">{{s}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
- submit-btn col m12">Submit<i class=" material-icons right">send</i></a>
+        <div class="card un-card">
+            <div class="card-content q-jump-container">
+                <span class="card-title bold gray">Question No.</span>
+                <div class="row">
+                    <div class="col s3" ng-repeat="q in quiz.questions| filter:{sectionId:quiz.section} ">
+                        <a class="waves-effect waves-light btn btn-floating q-jump" ng-click="quiz.index=q.qNo"
+                           ng-class="{'yellow text-dark':quiz.index==q.qNo,'teal':quiz.index==!q.qNo,'btn-large':quiz.largeButton}">
+                            {{q.qNo + 1}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<a class="btn waves-effect waves-light green accent-4 upload-btn col m12">upload<i class=" material-icons right">input</i></a>-->
 
     </div>
-    <div class="main col m9">
-      <div class="question">
-        <div class="card">
-          <div class="card-content">
-            <p class="question-content"></p>
-          </div>
-        </div>
-      </div>
-      <div class="answers card">
-        <ul id="q-options" class="collection card-content">
-          <li class="collection-item">
-            <input type="radio" name="options" value="1" id="option1"  />
-            <label for="option1" class="option"></label>
-          </li>
-          <li class="collection-item">
-            <input type="radio" name="options" value="2" id="option2" />
-            <label for="option2" class="option"></label>
-          </li>
-          <li class="collection-item">
-            <input type="radio" name="options" value="3" id="option3" />
-            <label for="option3" class="option"></label>
-          </li>
-          <li class="collection-item">
-            <input type="radio" name="options" value="4" id="option4" />
-            <label for="option4" class="option"></label>
-          </li>
+    <div class="main col m9 padding-top-20">
+        <div class="question">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Question</span>
+                    <h4 class="question-content">{{quiz.questions[quiz.index].question.text}}</h4>
+                    <img ng-show="quiz.questions[quiz.index].o1.image" ng-src="{{quiz.url}}/uploads/{{quiz.questions[quiz.index].o1.image}}">
 
-        </ul>
-      </div>
-      <div class="bcontainer">
-        <a class="btn waves-effect waves-light teal right nxt">Next<i class=" material-icons right">send</i></a>
-        <a class="btn waves-effect waves-light teal left prev">Previous<i class="rotate material-icons left">send</i></a>
-      </div>
+                </div>
+            </div>
+        </div>
+        <div class="answers card">
+            <ul id="q-options" class="collection card-content">
+                <span class="card-title">Choose the correct option</span>
+
+                <li class="collection-item">
+                    <input type="radio" name="options" value="1" id="option1" ng-model="quiz.answers[quiz.index]"/>
+                    <label for="option1" class="option">{{quiz.questions[quiz.index].o1.text}}</label>
+                    <img ng-show="quiz.questions[quiz.index].o1.image" ng-src="{{quiz.url}}/uploads/{{quiz.questions[quiz.index].o1.image}}">
+                </li>
+                <li class="collection-item">
+                    <input type="radio" name="options" value="2" id="option2" ng-model="quiz.answers[quiz.index]"/>
+                    <label for="option2" class="option">{{quiz.questions[quiz.index].o2.text}}</label>
+                    <img ng-show="quiz.questions[quiz.index].o2.image"  ng-src="{{quiz.url}}/uploads/{{quiz.questions[quiz.index].o1.image}}">
+
+                </li>
+                <li class="collection-item">
+                    <input type="radio" name="options" value="3" id="option3" ng-model="quiz.answers[quiz.index]"/>
+                    <label for="option3" class="option">{{quiz.questions[quiz.index].o3.text}}</label>
+                    <img ng-show="quiz.questions[quiz.index].o3.image"  ng-src="{{quiz.url}}/uploads/{{quiz.questions[quiz.index].o1.image}}">
+
+                </li>
+                <li class="collection-item">
+                    <input type="radio" name="options" value="4" id="option4" ng-model="quiz.answers[quiz.index]"/>
+                    <label for="option4" class="option">{{quiz.questions[quiz.index].o4.text}}</label>
+                    <img  ng-show="quiz.questions[quiz.index].o4.image"  ng-src="{{quiz.url}}/uploads/{{quiz.questions[quiz.index].o1.image}}">
+
+                </li>
+
+            </ul>
+        </div>
+        <div class="bcontainer">
+            <a class="btn btn-large waves-effect waves-light teal right nxt"
+               ng-click="quiz.index=(quiz.index+1)%quiz.questions.length;">Next<i class=" material-icons right ">navigate_next</i></a>
+            <a class="btn btn-large waves-effect waves-light teal left prev"
+               ng-click="quiz.prev()">Previous<i class=" material-icons left">navigate_before</i></a>
+        </div>
+        <div class="row paper-footer">
+            <div class="col s12 text-right">
+                <button class="btn btn-large btn-block waves-effect waves-light red" ng-click="quiz.submit()">Submit
+                    Paper
+                    <i class=" material-icons right">send</i>
+                </button>
+            </div>
+        </div>
     </div>
-  </section>
-<script>
-  window.$ = window.jQuery = require("jquery")
-  window.localforage = require("localforage")
-  require("../js/timer.js")
-  require("../quiz.js")
-  require("materialize-css")
-</script>
-</body>
-</html>
+</section>
+
+

@@ -16,8 +16,8 @@ localforage.iterate(function(value, key, iterationNumber) {
   console.log(correct);
   console.log(wrong);
   console.log(notattempted);
-  $(".correct").html(correct)
-  $(".wrong").html(wrong)
-  $(".attempted").html(notattempted)
-  $(".total").html(correct*3)
+  //$(".correct").html(correct)
+  //$(".wrong").html(wrong)
+  //$(".attempted").html(notattempted)
+  //$(".total").html(correct*3)
   });

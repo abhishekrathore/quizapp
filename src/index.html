@@ -3,17 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/standard.css">
   <link rel="stylesheet" href="../css/style.css">
+
+  <script src="../node_modules/angular/angular.js"></script>
+  <script src="../node_modules/angular-route/angular-route.min.js"></script>
+  <script src="../node_modules/localforage/dist/localforage.js"></script>
+  <script src="../node_modules/angular-localforage/dist/angular-localForage.min.js"></script>
+  <script src="../node_modules/underscore/underscore-min.js"></script>
+  <script src="app.js"></script>
   <title>Quiz App</title>
 </head>
-<body>
-  <div class="valign-wrapper a">
-    <a class="waves-effect waves-light blue accent-3 btn-large start">Start Quiz</a>
+<body ng-app="quiz">
+  <div ng-view>
+
   </div>
 </body>
 <script>
-  window.$ = window.jQuery = require("jquery")
-  require("../renderer.js")
-  require("materialize-css")
+
+  require("../renderer.js");
+
 </script>
 </html>

@@ -1,0 +1,35 @@
+<div ng-controller="testCtrl as t">
+    <div ng-style="t.fullHeight" class="valign-parent text-center full-width">
+        <div class="valign-child text-center">
+            <div class="row margin-bottom-30">
+                <div class="col s12 text-center ">
+                    <h2>TEST SERIES NAME</h2>
+                </div>
+            </div>
+            <div class="row div-center-20">
+                <div class=" col s12">
+                    <input placeholder="Username" id="user_name" type="text" ng-model="t.user.id">
+                    <!--<label >Username</label>-->
+                </div>
+            </div>
+            <div class="row div-center-20">
+                <div class=" col s12">
+                    <input placeholder="Password" id="password" type="password" ng-model="t.user.password">
+                    <!--<label >Password</label>-->
+                </div>
+            </div>
+            <div class="div-center-20 text-center">
+                <button class="btn waves-effect waves-light btn-large" ng-click="t.login()">Login
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--<a class="waves-effect waves-light blue accent-3 btn-large start" ng-href="#/quiz">{{t.name}}</a>-->
+
+</div>
+<div class="row paper-footer full-width">
+    <div class="col s12 text-center">
+        &copy; Youstart Education Private Limited
+    </div>
+</div>

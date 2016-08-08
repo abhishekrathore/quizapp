@@ -1,6 +1,58 @@
-.a {
-  height: 100vh;
+.valign-parent{
+    display: table;
 }
-.a a {
-  margin: auto;
+.valign-child{
+    display: table-cell;
+    vertical-align: middle;
+}
+.div-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.div-center-20{
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.full-width{
+    width: 100%;
+}
+.text-center{
+    text-align: center;
+}
+.paper-footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.stable-bg{
+    background-color: #e8e8e8  ;
+}
+.parent{
+    position: relative;
+}
+.child-bottom-right{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.text-dark{
+    color: #000;
+}
+.un-card{
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.header-timer-parent{
+    height: 124px;
+    display: table;
+}
+.header-timer{
+    display: table-cell;
+    vertical-align: bottom;
+    color: #fff;
+    text-align: right;
 }
